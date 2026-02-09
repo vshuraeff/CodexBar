@@ -40,3 +40,45 @@ open -a CodexBar
 
 ## 4) Push tap changes
 Commit + push in the tap repo.
+
+---
+
+## Build-from-source formula (vshuraeff/tap)
+
+The `vshuraeff/tap` hosts a build-from-source formula at `Formula/codexbar.rb` that supports both Intel and Apple Silicon Macs.
+
+### Updating the formula after a new release
+
+1. Tag the release in the fork:
+   ```bash
+   git tag v<version>
+   git push origin v<version>
+   ```
+
+2. Get the commit SHA for the tag:
+   ```bash
+   git rev-parse v<version>
+   ```
+
+3. Update `tag:` and `revision:` in `homebrew-tap/Formula/codexbar.rb`:
+   ```ruby
+   url "https://github.com/vshuraeff/CodexBar.git",
+       tag:      "v<version>",
+       revision: "<full-sha>"
+   ```
+
+4. Test the formula:
+   ```bash
+   brew uninstall codexbar || true
+   brew install --verbose vshuraeff/tap/codexbar
+   codexbar --help
+   open "$(brew --prefix)/opt/codexbar/CodexBar.app"
+   ```
+
+5. Commit and push the tap:
+   ```bash
+   cd /path/to/homebrew-tap
+   git add Formula/codexbar.rb
+   git commit -m "codexbar: update to v<version>"
+   git push origin main
+   ```

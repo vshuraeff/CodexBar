@@ -17,6 +17,14 @@ Download: <https://github.com/steipete/CodexBar/releases>
 brew install --cask steipete/tap/codexbar
 ```
 
+### Intel Mac / Build from source (via Homebrew)
+```bash
+brew install vshuraeff/tap/codexbar
+cp -R "$(brew --prefix)/opt/codexbar/CodexBar.app" /Applications/
+open /Applications/CodexBar.app
+```
+Builds from source on your machine — supports both Intel and Apple Silicon.
+
 ### Linux (CLI only)
 ```bash
 brew install steipete/tap/codexbar
